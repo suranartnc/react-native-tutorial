@@ -5,7 +5,12 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Finally it works!</Text>
+        <View style={styles.navigation}>
+          <Text>Navigation</Text>
+        </View>
+        <View style={styles.body}>
+          <Text>Main</Text>
+        </View>
       </View>
     );
   }
@@ -14,8 +19,13 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'blue'
   },
+  navigation: {
+    backgroundColor: 'gray'    
+  },
+  body: {
+    backgroundColor: 'red',
+    alignItems: 'center'
+  }
 });
