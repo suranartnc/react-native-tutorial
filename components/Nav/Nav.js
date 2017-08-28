@@ -1,11 +1,11 @@
 import React from 'react'
 import { PixelRatio } from 'react-native'
-import styled from 'styled-components/native'
+import sc from 'styled-components/native'
 
 import Hamburger from './Hamburger'
 import Search from './Search'
 
-const StyledNav = styled.View`
+const StyledNav = sc.View`
   margin-top: 20px;
   flex-direction: row;
   align-items: center;
@@ -18,7 +18,7 @@ const StyledNav = styled.View`
   border-bottom-width: 1px;
 `
 
-const StyledText = styled.Text`
+const StyledText = sc.Text`
   color: red;
 `
 
