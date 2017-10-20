@@ -5,11 +5,16 @@
  */
 
 import React, { Component } from 'react';
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  TextInput,
+  View,
+  Image,
+  Button,
+  Alert
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -20,18 +25,62 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+    this.handleKeywordsChanged = this.handleKeywordsChanged.bind(this);
+    this.handleKeywordsSubmitted = this.handleKeywordsSubmitted.bind(this);
+    
+    this.state = {
+      show: true,
+      keywords: '',
+      output: 'default'
+    };
+  }
+
+  componentDidMount() {
+    // setInterval(() => {
+    //   this.setState({
+    //     show: !this.state.show
+    //   })
+    // }, 1000);
+  }
+  
+  handleKeywordsChanged(keywords) {
+    this.setState({
+      keywords
+    });
+  }
+
+  handleKeywordsSubmitted() {
+    this.setState({
+      output: this.state.keywords
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <View style={styles.highlight}>
+          <Text>{this.state.output}</Text>
+          <Button 
+            title={this.state.keywords} 
+            onPress={() => { Alert.alert(this.state.keywords); }}
+          />
+          {/* { 
+            this.state.show && 
+            <Image 
+              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' }}
+              style={styles.image}
+            /> 
+          } */}
+        </View>
+        <View style={styles.highlight} />
+          <TextInput 
+            placeholder="Enter keywords here..." 
+            onChangeText={this.handleKeywordsChanged} 
+            onSubmitEditing={this.handleKeywordsSubmitted}
+          />
+        <View style={styles.highlight} />
       </View>
     );
   }
@@ -39,19 +88,19 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#aaa',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  highlight: {
+    borderWidth: 1,    
+    borderColor: 'red',
+    width: 200,
+    height: 100
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  image: {
+    width: 193,
+    height: 110
+  }
 });
