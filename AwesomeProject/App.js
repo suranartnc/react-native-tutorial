@@ -20,6 +20,8 @@ import {
   StackNavigator,
 } from 'react-navigation';
 
+import Touchable from 'react-native-platform-touchable';
+
 class HomeScreen extends Component<{}> {
   constructor(props) {
     super(props);
@@ -81,6 +83,17 @@ class RepoScreen extends Component {
 
     return (
       <View>
+        <Touchable
+          onPress={() => console.log('hello!')}
+          style={{
+            backgroundColor: '#eee',
+            paddingVertical: 30,
+            paddingHorizontal: 80,
+          }}
+          background={Touchable.Ripple('blue')}
+        >
+          <Text>Tap me</Text>
+        </Touchable>
         <Image source={require('./img/header_logo.png')} />
         <Image 
           source={{ 
