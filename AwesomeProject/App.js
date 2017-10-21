@@ -22,17 +22,31 @@ import {
 } from 'react-native';
 
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      repos: []
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://api.github.com/orgs/octokit/repos')
+      .then(res => res.json())
+      .then(json => {
+        console.log(json);
+        this.setState({
+          repos: json
+        });
+      });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <SectionList
-          sections={[
-            { title: 'Section 1', data: ['Devin'] },
-            { title: 'Section 2', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie'] },
-          ]}
-          renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-          renderSectionHeader={({ section }) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-          keyExtractor={(item, index) => index}
+        <FlatList
+          data={this.state.repos}
+          renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+          keyExtractor={(item) => item.id}
         />
       </View>
     );
