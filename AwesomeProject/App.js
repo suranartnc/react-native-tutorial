@@ -18,13 +18,15 @@ import {
   TouchableHighlight,
   ScrollView,
   FlatList,
-  SectionList
+  SectionList,
+  ActivityIndicator
 } from 'react-native';
 
 export default class App extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
       repos: []
     };
   }
@@ -35,12 +37,21 @@ export default class App extends Component<{}> {
       .then(json => {
         console.log(json);
         this.setState({
+          isLoading: false,
           repos: json
         });
       });
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+    
     return (
       <View style={styles.container}>
         <FlatList
