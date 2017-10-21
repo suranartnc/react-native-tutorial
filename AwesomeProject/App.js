@@ -14,7 +14,8 @@ import {
   View,
   Image,
   Button,
-  Alert
+  Alert,
+  TouchableHighlight 
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -62,6 +63,11 @@ export default class App extends Component<{}> {
       <View style={styles.container}>
         <View style={styles.highlight}>
           <Text>{this.state.output}</Text>
+          <TouchableHighlight onPress={() => { Alert.alert('TouchableHighlight'); }}>
+            <View>
+              <Text>TouchableHighlight</Text>
+            </View>
+          </TouchableHighlight>
           <Button 
             title={this.state.keywords} 
             onPress={() => { Alert.alert(this.state.keywords); }}
