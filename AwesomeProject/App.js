@@ -15,7 +15,8 @@ import {
   Image,
   Button,
   Alert,
-  TouchableHighlight 
+  TouchableHighlight,
+  ScrollView 
 } from 'react-native';
 
 const instructions = Platform.select({
@@ -60,34 +61,45 @@ export default class App extends Component<{}> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.highlight}>
-          <Text>{this.state.output}</Text>
-          <TouchableHighlight onPress={() => { Alert.alert('TouchableHighlight'); }}>
-            <View>
-              <Text>TouchableHighlight</Text>
-            </View>
-          </TouchableHighlight>
-          <Button 
-            title={this.state.keywords} 
-            onPress={() => { Alert.alert(this.state.keywords); }}
-          />
-          {/* { 
-            this.state.show && 
-            <Image 
-              source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' }}
-              style={styles.image}
-            /> 
-          } */}
+      <ScrollView contentContainerStyle={styles.container}>
+        <View>
+          <View style={styles.highlight}>
+            <Text>{this.state.output}</Text>
+            <TouchableHighlight onPress={() => { Alert.alert('TouchableHighlight'); }}>
+              <View>
+                <Text>TouchableHighlight</Text>
+              </View>
+            </TouchableHighlight>
+            <Button 
+              title={this.state.keywords} 
+              onPress={() => { Alert.alert(this.state.keywords); }}
+            />
+            {/* { 
+              this.state.show && 
+              <Image 
+                source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg' }}
+                style={styles.image}
+              /> 
+            } */}
+          </View>
+          <View style={styles.highlight} />
+            <TextInput 
+              placeholder="Enter keywords here..." 
+              onChangeText={this.handleKeywordsChanged} 
+              onSubmitEditing={this.handleKeywordsSubmitted}
+            />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+          <View style={styles.highlight} />
+
         </View>
-        <View style={styles.highlight} />
-          <TextInput 
-            placeholder="Enter keywords here..." 
-            onChangeText={this.handleKeywordsChanged} 
-            onSubmitEditing={this.handleKeywordsSubmitted}
-          />
-        <View style={styles.highlight} />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -95,9 +107,9 @@ export default class App extends Component<{}> {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#aaa',
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   highlight: {
     borderWidth: 1,    
