@@ -7,22 +7,18 @@
 import React, { Component } from 'react';
 
 import {
-  Platform,
   StyleSheet,
   Text,
-  TextInput,
   View,
-  Image,
-  Button,
-  Alert,
-  TouchableHighlight,
-  ScrollView,
   FlatList,
-  SectionList,
   ActivityIndicator
 } from 'react-native';
 
-export default class App extends Component<{}> {
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+class HomeScreen extends Component<{}> {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +40,8 @@ export default class App extends Component<{}> {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+    
     if (this.state.isLoading) {
       return (
         <View style={{ flex: 1, paddingTop: 20 }}>
@@ -56,9 +54,32 @@ export default class App extends Component<{}> {
       <View style={styles.container}>
         <FlatList
           data={this.state.repos}
-          renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+          renderItem={({ item }) => (
+              <Text 
+                style={styles.item}
+                onPress={() =>
+                  navigate('Repo', { 
+                    name: item.name 
+                  })
+                }
+              >
+                {item.name}
+              </Text>
+            )}
           keyExtractor={(item) => item.id}
         />
+      </View>
+    );
+  }
+}
+
+class RepoScreen extends Component {
+  render() {
+    const { state: { params: { name } } } = this.props.navigation;
+
+    return (
+      <View>
+        <Text>{name}</Text>
       </View>
     );
   }
@@ -84,3 +105,20 @@ const styles = StyleSheet.create({
     height: 44,
   },
 });
+
+const App = StackNavigator({
+  Home: { 
+    screen: HomeScreen,
+    navigationOptions: {
+      title: 'Repositories'
+    }
+  },
+  Repo: { 
+    screen: RepoScreen,
+    navigationOptions: {
+      title: 'Description'
+    }
+  },
+});
+
+export default App;
