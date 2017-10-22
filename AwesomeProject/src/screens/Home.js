@@ -43,6 +43,12 @@ export default class HomeScreen extends Component<{}> {
     
     return (
       <View style={styles.container}>
+        <Button
+          title="Web" 
+          onPress={() => navigate('Web', {
+            uri: ''
+          })}
+        />
         <Button title="Refresh" onPress={this.fetchRepos} />
         <FlatList
           data={this.state.repos}

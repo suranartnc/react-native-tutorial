@@ -4,6 +4,7 @@ import {
 
 import HomeScreen from './Home';
 import RepoScreen from './Repo';
+import WebScreen from './Web';
 
 const App = StackNavigator({
   Home: { 
@@ -16,6 +17,12 @@ const App = StackNavigator({
     screen: RepoScreen,
     navigationOptions: {
       title: 'Description'
+    }
+  },
+  Web: { 
+    screen: WebScreen,
+    navigationOptions: {
+      title: 'Web'
     }
   },
 });
