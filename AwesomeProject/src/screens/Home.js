@@ -5,28 +5,29 @@ import {
   Text,
   View,
   FlatList,
+  Button,
   ActivityIndicator
 } from 'react-native';
 
 export default class HomeScreen extends Component<{}> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: true,
-      repos: []
-    };
-  }
+  state = {
+    isLoading: true,
+    repos: []
+  };
 
-  componentDidMount() {
+  fetchRepos = () => {
     fetch('https://api.github.com/orgs/octokit/repos')
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         this.setState({
           isLoading: false,
           repos: json
         });
       });
+  }
+
+  componentDidMount() {
+    this.fetchRepos();
   }
 
   render() {
@@ -42,6 +43,7 @@ export default class HomeScreen extends Component<{}> {
     
     return (
       <View style={styles.container}>
+        <Button title="Refresh" onPress={this.fetchRepos} />
         <FlatList
           data={this.state.repos}
           renderItem={({ item }) => (
