@@ -3,8 +3,7 @@ import {
 } from 'react-navigation';
 
 import HomeScreen from './Home';
-import RepoScreen from './Repo';
-import WebScreen from './Web';
+import EntryScreen from './Entry';
 
 const App = StackNavigator({
   Home: { 
@@ -13,16 +12,10 @@ const App = StackNavigator({
       title: 'Repositories'
     }
   },
-  Repo: { 
-    screen: RepoScreen,
+  Entry: { 
+    screen: EntryScreen,
     navigationOptions: {
-      title: 'Description'
-    }
-  },
-  Web: { 
-    screen: WebScreen,
-    navigationOptions: {
-      title: 'Web'
+      title: 'Entry'
     }
   },
 });
